@@ -63,23 +63,23 @@ void m_output(cstate *state, parseinfo info) {
         }
     } else if (info.type == I_STACK) {
         m_obj obj = m_fetchstk(state, info.result);
-        
-        if (elem.v_type == FUNCTION) {
-            val = "Function : " + elem.v_name;
-        } else if (elem.v_type == TABLE) {
-            val = "Table : " + elem.v_name;
-        } else if (elem.v_type == CLASS) {
-            val = "Class : " + elem.v_name;
-        } else if (elem.v_type == CLASS_INS) {
-                    val = "Instance Of : " + state->getatmemaddr(elem.instanceof)->v_name;
-                } else if (elem.v_type == STRING) {
-                    val = "\"" + elem.v_val + "\"";
-                } else if (elem.v_type == NUMBER) {
-                    val = elem.v_val;
-                }
+        std::string val;
+        if (obj.v_type == FUNCTION) {
+            val = "Function : " + obj.v_name;
+        } else if (obj.v_type == TABLE) {
+            val = "Table : " + obj.v_name;
+        } else if (obj.v_type == CLASS) {
+            val = "Class : " + obj.v_name;
+        } else if (obj.v_type == CLASS_INS) {
+            val = "Instance Of : " + state->getatmemaddr(obj.instanceof)->v_name;
+        } else if (obj.v_type == STRING) {
+            val = "\"" + obj.v_val + "\"";
+        } else if (obj.v_type == NUMBER) {
+            val = obj.v_val;
+        }
     }
 }
 
 void m_input(cstate *state, parseinfo stackinfo) {
-
+    
 }
