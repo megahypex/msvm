@@ -3,7 +3,7 @@
 #include <string>
 #include <stack>
 #include <vector>
-#include <unordered_map>
+#include <map>
 
 enum V_TYPE {
   FUNCTION,
@@ -35,7 +35,7 @@ struct m_obj {
 
   /* table / dictionary */
   std::vector<m_obj> tabindexstor;                    /* For storing index / value pairs */
-  std::unordered_map<std::string, m_obj> tabkeystor;  /* For storing key / value pairs */
+  std::map<std::string, m_obj> tabkeystor;  /* For storing key / value pairs NOTE : Pair is inserted instead of the objects themselves*/
 
   /* Class */
   bool priv;              /* Is private? */

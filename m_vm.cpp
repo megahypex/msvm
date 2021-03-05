@@ -13,7 +13,7 @@ int main() {
     m_frame mf;
     mf.cline = -1;
     mf.f_name = "$main";
-    state.m_cstack.push_back(mf);
+    state.m_cstack.push_back(mf);    
 
     state.compute();
 }

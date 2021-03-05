@@ -42,7 +42,7 @@ void m_output(cstate *state, parseinfo info) {
                 }
             }
 
-            for (std::pair<std::string, m_obj> elem : obj->tabkeystor) {
+            for (auto& elem : obj->tabkeystor) {
                 std::string val = "; ";
                 if (elem.second.v_type == FUNCTION) {
                     val = "Function : " + elem.second.v_name;
@@ -62,20 +62,20 @@ void m_output(cstate *state, parseinfo info) {
             }
         }
     } else if (info.type == I_STACK) {
-        m_obj obj = m_fetchstk(state, info.result);
+        m_obj *obj = m_fetchstk(state, info.result);
         std::string val;
-        if (obj.v_type == FUNCTION) {
-            val = "Function : " + obj.v_name;
-        } else if (obj.v_type == TABLE) {
-            val = "Table : " + obj.v_name;
-        } else if (obj.v_type == CLASS) {
-            val = "Class : " + obj.v_name;
-        } else if (obj.v_type == CLASS_INS) {
-            val = "Instance Of : " + state->getatmemaddr(obj.instanceof)->v_name;
-        } else if (obj.v_type == STRING) {
-            val = "\"" + obj.v_val + "\"";
-        } else if (obj.v_type == NUMBER) {
-            val = obj.v_val;
+        if (obj->v_type == FUNCTION) {
+            val = "Function : " + obj->v_name;
+        } else if (obj->v_type == TABLE) {
+            val = "Table : " + obj->v_name;
+        } else if (obj->v_type == CLASS) {
+            val = "Class : " + obj->v_name;
+        } else if (obj->v_type == CLASS_INS) {
+            val = "Instance Of : " + state->getatmemaddr(obj->instanceof)->v_name;
+        } else if (obj->v_type == STRING) {
+            val = "\"" + obj->v_val + "\"";
+        } else if (obj->v_type == NUMBER) {
+            val = obj->v_val;
         }
     }
 }

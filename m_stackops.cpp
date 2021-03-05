@@ -26,6 +26,7 @@ void m_push(cstate *state, parseinfo stkinfo, parseinfo valinfo) {
 
     /* Push */
     stk->push(obj);
+	std::cout << "Pushed\n";
 }
 
 void m_pop(cstate *state, parseinfo stkinfo) {
@@ -37,12 +38,15 @@ void m_pop(cstate *state, parseinfo stkinfo) {
 
     /* Check if stack is empty */
     std::stack<m_obj> *stk = &(state->stkstor[stkinfo.result]);
-     if (stk->empty()) {
-         m_error(state, "Internal Error : Pop attempted on empty stack", RUNTIME);
-     }
+    if (stk->empty()) {
+        m_error(state, "Internal Error : Pop attempted on empty stack", RUNTIME);
+    }
+
+	stk->pop();
+	std::cout << "Popped!\n";	
 }
 
-m_obj m_fetchstk(cstate *state, std::string stkname) {
+m_obj* m_fetchstk(cstate *state, std::string stkname) {
     /* Check if stack exists */
 
     if (state->stkstor.find(stkname) == state->stkstor.end()) {
@@ -52,9 +56,9 @@ m_obj m_fetchstk(cstate *state, std::string stkname) {
 
     /* Check if stack is empty */
     std::stack<m_obj> *stk = &(state->stkstor[stkname]);
-     if (stk->empty()) {
-         m_error(state, "Internal Error : Fetch attempted on empty stack", RUNTIME);
-     }
+    if (stk->empty()) {
+        m_error(state, "Internal Error : Fetch attempted on empty stack", RUNTIME);
+    }
 
-     return stk->top();
+    return &(stk->top());
 }
