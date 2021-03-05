@@ -14,4 +14,5 @@ clean :
 	rm m_ioops.o
 	rm m_stackops.o
 	rm util.o
+	rm mvm_parse.o
 	rm vm
