@@ -8,6 +8,7 @@
 
 #include "m_stackops.hpp"
 #include "m_ioops.hpp"
+#include "m_binops.hpp"
 
 void cstate::compute() {
     /* Checks */
@@ -51,11 +52,35 @@ void cstate::compute() {
         } else if (args[0] == "inp") {
             parseinfo stackinf = parse_str(args[1]);
 
-            m_input(this, stackinf);     
+            m_input(this, stackinf); 
+        } else if (args[0] == "add") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_addstk(this, stackinf);
+        } else if (args[0] == "sub") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_substk(this, stackinf);
+        } else if (args[0] == "mul") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_mulstk(this, stackinf);
+        } else if (args[0] == "div") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_divstk(this, stackinf);
+        } else if (args[0] == "mod") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_modstk(this, stackinf);
+        } else if (args[0] == "pow") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_powstk(this, stackinf);
         } else {
             std::cout << "Unknown Token" << std::endl;
             exit(0);
-        }
+        } 
 
         this->locpointer += 1;
     }
