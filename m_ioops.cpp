@@ -118,6 +118,7 @@ void m_output(cstate *state, parseinfo info) {
         case I_STACK: {
             /* Get the top of the stack */
             print_univ(state, m_fetchstk(state, info.result));
+			m_pop(state, info);
             return;
         } 
         case STRING: {
