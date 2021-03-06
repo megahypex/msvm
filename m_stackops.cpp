@@ -7,7 +7,7 @@
 #include "m_err.hpp"
 #include "mvm_parse.hpp"
 
-void m_push(cstate *state, parseinfo stkinfo, parseinfo valinfo) {
+void m_push(cstate *state, parseinfo stkinfo, m_obj obj) {
     /* Check if stack exists */
     if (state->stkstor.find(stkinfo.result) == state->stkstor.end()) {
         std::cout << "Stack `" << stkinfo.result << "` not found\n"; 
@@ -20,13 +20,8 @@ void m_push(cstate *state, parseinfo stkinfo, parseinfo valinfo) {
         m_error(state, "Internal Error : Stack Overflow while pushing", RUNTIME);
     }
 
-    m_obj obj;
-    obj.v_type = valinfo.type;
-    obj.v_val = valinfo.result;
-
     /* Push */
     stk->push(obj);
-	std::cout << "Pushed\n";
 }
 
 void m_pop(cstate *state, parseinfo stkinfo) {
@@ -43,7 +38,6 @@ void m_pop(cstate *state, parseinfo stkinfo) {
     }
 
 	stk->pop();
-	std::cout << "Popped!\n";	
 }
 
 m_obj* m_fetchstk(cstate *state, std::string stkname) {

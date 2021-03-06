@@ -7,6 +7,7 @@
 #include "mvm_parse.hpp"
 
 #include "m_stackops.hpp"
+#include "m_ioops.hpp"
 
 void cstate::compute() {
     /* Checks */
@@ -34,11 +35,23 @@ void cstate::compute() {
             parseinfo stackinf = parse_str(args[1]);
             parseinfo valueinf = parse_str(args[2]);
             
-            m_push(this, stackinf, valueinf);
+            m_obj nobj;
+            nobj.v_type = valueinf.type;
+            nobj.v_val = valueinf.result;
+
+            m_push(this, stackinf, nobj);
         } else if (args[0] == "pop") {
             parseinfo stackinf = parse_str(args[1]);
 
             m_pop(this, stackinf);
+        } else if (args[0] == "out") {
+            parseinfo valinf = parse_str(args[1]);
+
+            m_output(this, valinf);
+        } else if (args[0] == "inp") {
+            parseinfo stackinf = parse_str(args[1]);
+
+            m_input(this, stackinf);     
         } else {
             std::cout << "Unknown Token" << std::endl;
             exit(0);

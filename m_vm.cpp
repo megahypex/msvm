@@ -8,8 +8,8 @@ int main() {
     cstate state;
 
     /* Create a main function and push a frame for it */
-    state.instructions.push_back("push %d 'hello lol'");
-    state.instructions.push_back("pop %d");
+    state.instructions.push_back("inp %d");
+    state.instructions.push_back("out %d");
     m_frame mf;
     mf.cline = -1;
     mf.f_name = "$main";
